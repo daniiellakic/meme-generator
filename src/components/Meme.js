@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import html2canvas from "html2canvas";
 
 export default function Meme() {
 
@@ -16,9 +15,7 @@ export default function Meme() {
   useEffect(() => {
     fetch("https://api.imgflip.com/get_memes")
     .then(res => res.json()) //parsing data from json to js
-    .then(data => 
-      setAllMemes(data.data.memes))// data back
-      setDownload(meme.url) 
+    .then(data => setAllMemes(data.data.memes))// data back
   }, [])
   
   function generateImage(){
@@ -40,7 +37,7 @@ export default function Meme() {
   }
 
   const [download, setDownload] = useState(null)
-  
+
   const downloadMeme = ()=> {
     fetch(download, {
       method: "GET",
