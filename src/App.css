@@ -15,7 +15,7 @@ main{
   height: 100px;
   color: white;
   padding: 20px;
-  background: linear-gradient(90deg, #672280 1.18%, #A626D3 100%);
+  background: linear-gradient(90deg, #222a80 1.18%, #190d54 100%);
 }
 .logo{
   height: 100%;
@@ -42,10 +42,31 @@ main{
   border-radius: 5px;
   border: none;
   cursor: pointer;
-  background: linear-gradient(90deg, #672280 1.18%, #A626D3 100%);
+  background: linear-gradient(90deg, #222a80 1.18%, #190d54 100%);
   color: white;
   font-size: 1rem;;
   font-weight: 700;
+}
+.form__button:hover{
+   filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.3));
+}
+.download__button{
+  font-family: "Karla", sans-serif;
+  width: 200px;
+  height: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(90deg, #222a80 1.18%, #190d54 100%);
+  color: white;
+  font-size: 1rem;;
+  font-weight: 600;
+}
+.download__button:hover{
+  filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.3));
 }
 .form__input{
   font-family: "Karla", sans-serif;
@@ -63,6 +84,9 @@ main{
   background-size: cover;
   border-radius: 5px;
   margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 .meme__text {
   position: absolute;
