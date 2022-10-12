@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import html2canvas from "html2canvas";
 
 export default function Meme() {
-  
-  //const [memeImage, setMemeImage] = useState();
 
   const [meme, setMeme] = useState({
     topText: "",
     bottomText: "",
-    randomImage: "http://i.imgflip.com/1bij.jpg" 
+    randomImage: "http://i.imgflip.com/1bid.jpg" 
   })
 
   const [allMemes, setAllMemes] = useState([])
@@ -17,7 +16,9 @@ export default function Meme() {
   useEffect(() => {
     fetch("https://api.imgflip.com/get_memes")
     .then(res => res.json()) //parsing data from json to js
-    .then(data => setAllMemes(data.data.memes)) // data back
+    .then(data => 
+      setAllMemes(data.data.memes))// data back
+      setDownload(meme.url) 
   }, [])
   
   function generateImage(){
@@ -26,9 +27,10 @@ export default function Meme() {
     setMeme(prevMeme => ({
       ...prevMeme,
       randomImage: url
+      
     }))
   }
-
+   // Method to change the value of input fields
   function handleChange(event){
     const {name, value} = event.target
     setMeme(prevMeme => ({
@@ -36,6 +38,29 @@ export default function Meme() {
       [name]: value
     }))
   }
+
+  const [download, setDownload] = useState(null)
+  
+  const downloadMeme = ()=> {
+    fetch(download, {
+      method: "GET",
+      headers: {}
+    })
+      .then(response => {
+        response.arrayBuffer().then(function(buffer) {
+          const url = window.URL.createObjectURL(new Blob([buffer]));
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", "meme.png"); 
+          document.body.appendChild(link);
+          link.click();
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    }
+
 
   return (
     <main>
@@ -67,6 +92,10 @@ export default function Meme() {
         <h2 className="meme__text top">{meme.topText}</h2>
         <h2 className="meme__text bottom">{meme.bottomText}</h2>
       </div>
+      <br />
+      <button  onClick={e => downloadMeme(e)} className="download__button">
+        Download
+      </button>
     </main>
   );
 }
